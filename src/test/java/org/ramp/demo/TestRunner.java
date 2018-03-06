@@ -33,11 +33,21 @@ public class TestRunner extends SetUp {
 
 	}
 
+	public void viewEvent() {
+		MulticasetPlusEventsTab event = new MulticasetPlusEventsTab();
+		//event.navigatetoEvents();
+		event.viewEvent();
+
+	}
+	
+	
+	
 	@Test
 	public void testsequence() {
 		BasicConfigurator.configure();
 		openRamp();
 		createEvent();
+		viewEvent();
 
 	}
 

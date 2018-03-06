@@ -32,6 +32,9 @@ public class MulticasetPlusEventsTab extends SetUp {
 	private Select selectMulticastChannel;
 	private WebElement contnetServerURL;
 	private WebElement eventSave;
+	public WebElement eventsGrid;
+	public WebElement CloseDetails;
+	
 	final static Logger logger = Logger.getLogger(AltimeterHomePage.class);
 
 	public void navigatetoEvents() {
@@ -41,11 +44,26 @@ public class MulticasetPlusEventsTab extends SetUp {
 		events.click();
 	}
 
+	
+	public  void viewEvent(){
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 System.out.println("Viewing events" );
+		eventsGrid = SetUp.getDriver().findElement(By.xpath(".//*[@id='tabdisplay']"));	
+		
+	}
+	
+	
+	
 	public void createEventFlow() {
 		WebDriverWait wait = new WebDriverWait(SetUp.getDriver(), 10000);
 		Common commonPara = new Common();
-		String startTime = commonPara.getCurrentTime();
-		String endtTime = commonPara.getLaterTimeStamp(1);
+		String startTime = commonPara.getLaterTimeStamp(1);
+		String endtTime = commonPara.getLaterTimeStamp(2);
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath(".//img[@class='listAction'][@src='images/create.svg']")));
 		createEvent = SetUp.getDriver().findElement(By.xpath(".//img[@class='listAction'][@src='images/create.svg']"));
@@ -53,7 +71,7 @@ public class MulticasetPlusEventsTab extends SetUp {
 		// Fill events details in popup
 		SetUp.pauseDriver(5);
 		eventName = SetUp.getDriver().findElement(By.xpath(".//*[@id='multicastEventName']"));
-		eventName.sendKeys("TestEv2");
+		eventName.sendKeys("TestEv10");
 		eventStartTime = SetUp.getDriver().findElement(By.xpath(".//*[@id='startTime']"));
 		eventStartTime.sendKeys(startTime);
 		eventEndTime = SetUp.getDriver().findElement(By.xpath(".//*[@id='endTime']"));
@@ -67,26 +85,68 @@ public class MulticasetPlusEventsTab extends SetUp {
 		closeSenders = SetUp.getDriver().findElement(By.xpath("(//*[@id='rr_close'])[2]"));
 		closeSenders.click();
 		selectMulticastChannel = new Select(SetUp.getDriver().findElement(By.xpath(".//*[@id='multicastChannelID']")));
-		selectMulticastChannel.selectByVisibleText("Channel 1");
+		selectMulticastChannel.selectByVisibleText("channel 1");
 		contnetServerURL = SetUp.getDriver().findElement(By.xpath(".//*[@id='sourceUrl']"));
-		contnetServerURL.sendKeys("https://mnmedias.api.telequebec.tv/m3u8/29880.m3u8");
+		contnetServerURL.sendKeys("https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8");
 		eventSave = SetUp.getDriver().findElement(By.xpath(".//*[@id='createevent']"));
 		eventSave.click();
-	       // Switching to Alert   This segment is not working yet..      
-        Alert alert = SetUp.getDriver().switchTo().alert();	
-        alert.accept();
- /*
-		try {
+	       // Switching to Alert     
+    	try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Alert alert = SetUp.getDriver().switchTo().alert();	
+    	try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Keyboard kb = ((RemoteWebDriver) SetUp.getDriver()).getKeyboard();
-		kb.pressKey(Keys.RETURN);
-        */
+        System.out.println(alert.getText());
+     	try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        alert.accept();
+        try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        CloseDetails = SetUp.getDriver().findElement(By.xpath(".//button[@id='rr_close']"));
+        System.out.println("going to close "+ CloseDetails.getText() );
+      //  CloseDetails.click();
         
-        
+    	try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	/*
+    	 alert = SetUp.getDriver().switchTo().alert();	
+    	try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        System.out.println(alert.getText());
+     	try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        alert.accept();
+    	*/
 	}
 	
 

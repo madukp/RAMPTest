@@ -62,8 +62,9 @@ public class MulticasetPlusEventsTab extends SetUp {
 	public void createEventFlow() {
 		WebDriverWait wait = new WebDriverWait(SetUp.getDriver(), 10000);
 		Common commonPara = new Common();
-		String startTime = commonPara.getLaterTimeStamp(1);
-		String endtTime = commonPara.getLaterTimeStamp(2);
+		String startTime = commonPara.getLaterTimeStampinSec(0);
+		String endtTime = commonPara.getLaterTimeStampinSec(60);
+		String randomUUID = commonPara.generateUUID().toString();
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath(".//img[@class='listAction'][@src='images/create.svg']")));
 		createEvent = SetUp.getDriver().findElement(By.xpath(".//img[@class='listAction'][@src='images/create.svg']"));
@@ -71,7 +72,7 @@ public class MulticasetPlusEventsTab extends SetUp {
 		// Fill events details in popup
 		SetUp.pauseDriver(5);
 		eventName = SetUp.getDriver().findElement(By.xpath(".//*[@id='multicastEventName']"));
-		eventName.sendKeys("TestEv10");
+		eventName.sendKeys("TestEv "+randomUUID);
 		eventStartTime = SetUp.getDriver().findElement(By.xpath(".//*[@id='startTime']"));
 		eventStartTime.sendKeys(startTime);
 		eventEndTime = SetUp.getDriver().findElement(By.xpath(".//*[@id='endTime']"));
